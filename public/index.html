@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worlio - WebGPU 3D Engine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- WebGPU Canvas principal -->
+  <canvas id="webgpu-canvas"></canvas>
+
+  <!-- HUD e Interfaz de Usuario -->
+  <div id="hud" class="hud-container">
+    <div class="hud-header">
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <h1>WORLIO</h1>
+        <span class="badge">WebGPU 3D</span>
+      </div>
+      <p class="subtitle">Base del motor de videojuego 3D</p>
+    </div>
+
+    <div class="stats-panel">
+      <div class="stat-item">
+        <span class="stat-label">FPS</span>
+        <span class="stat-value" id="fps-counter">--</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Adaptador</span>
+        <span class="stat-value" id="gpu-adapter">Detectando...</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Geometría</span>
+        <span class="stat-value" id="mesh-info">Plano 3D (40x40m)</span>
+      </div>
+    </div>
+
+    <div class="instructions-panel">
+      <div class="instruction-row">
+        <span class="key-tag">Clic Izq + Arrastrar</span>
+        <span>Rotar cámara (Orbit)</span>
+      </div>
+      <div class="instruction-row">
+        <span class="key-tag">Rueda del Ratón</span>
+        <span>Zoom</span>
+      </div>
+      <div class="instruction-row">
+        <span class="key-tag">Clic Der + Arrastrar</span>
+        <span>Desplazar vista (Pan)</span>
+      </div>
+    </div>
+
+    <div class="actions-panel">
+      <button id="btn-auto-rotate" class="btn btn-secondary">Auto-Rotación: ON</button>
+      <button id="btn-reset-cam" class="btn btn-primary">Centrar Cámara</button>
+    </div>
+  </div>
+
+  <!-- Pantalla de error / no soporte de WebGPU -->
+  <div id="webgpu-fallback" class="fallback-overlay hidden">
+    <div class="fallback-card">
+      <div class="fallback-icon">⚠️</div>
+      <h2>WebGPU no disponible</h2>
+      <p id="fallback-message">
+        Tu navegador o tarjeta gráfica no tiene soporte para la API de <strong>WebGPU</strong> activado en este momento.
+      </p>
+      <div class="fallback-instructions">
+        <h3>Cómo habilitar WebGPU:</h3>
+        <ul>
+          <li><strong>Google Chrome / Brave / Edge:</strong> Asegúrate de usar una versión actualizada (113+) y tener activada la aceleración de hardware en <em>Configuración &gt; Sistema</em>.</li>
+          <li><strong>macOS Safari:</strong> Safari 18+ o en menú <em>Desarrollo &gt; Feature Flags &gt; WebGPU</em>.</li>
+          <li><strong>Firefox:</strong> Escribe <code>about:config</code> y activa <code>dom.webgpu.enabled</code>.</li>
+        </ul>
+      </div>
+      <button onclick="location.reload()" class="btn btn-primary">Reintentar</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
