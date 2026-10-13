@@ -1,5 +1,6 @@
 import { initializeWebGPUEngine, WebGPUNotSupportedError } from './graphics/webgpu.js';
 import { createBenchmarkScene } from './scenes/benchmarkScene.js';
+import { createOrbitalScene } from './scenes/orbitalScene.js';
 import { ClientTelemetryTracker } from './telemetry/index.js';
 import type { ServerMessage, ClientMessage } from '@universo/shared';
 
@@ -9,11 +10,14 @@ async function bootstrap() {
   const hudFps = document.getElementById('hud-fps');
   const hudWs = document.getElementById('hud-ws');
   const hudEngine = document.getElementById('hud-engine');
+  const hudPlanet = document.getElementById('hud-planet');
   const invMadera = document.getElementById('inv-madera');
   const invPiedra = document.getElementById('inv-piedra');
   const btnReserve = document.getElementById('btn-reserve');
 
   const telemetry = new ClientTelemetryTracker();
+  const urlParams = new URLSearchParams(window.location.search);
+  const sceneMode = urlParams.get('scene'); // 'benchmark' | 'orbital' (default)
 
   try {
     // 1. Inicialización exclusiva de WebGPU (T09)
@@ -25,9 +29,21 @@ async function bootstrap() {
       hudEngine.textContent = `WebGPU (${adapterDesc})`;
     }
 
-    // 2. Crear escena de benchmark (100 bloques, suelo, iluminación, cámara de órbita)
-    const { scene, boxCount, firstRenderDurationMs } = createBenchmarkScene(engine, canvas);
-    console.log(`📦 Escena de benchmark creada con ${boxCount} bloques. Primer frame: ${firstRenderDurationMs} ms.`);
+    // 2. Selector de escena: Orbital Cube-Sphere (T12) o Benchmark 100 bloques (T09)
+    let activeScene;
+    if (sceneMode === 'benchmark') {
+      const { scene, boxCount } = createBenchmarkScene(engine, canvas);
+      activeScene = scene;
+      if (hudPlanet) hudPlanet.textContent = `Benchmark (${boxCount} bloques)`;
+    } else {
+      const planetKey = urlParams.get('planet') || 'TERRA_PRIME';
+      const { scene, planetResult } = createOrbitalScene(engine, canvas);
+      activeScene = scene;
+      if (hudPlanet) {
+        hudPlanet.textContent = `${planetKey} (${planetResult.totalTriangles} $\\Delta$ en ${planetResult.generationDurationMs} ms)`;
+      }
+      console.log(`🪐 Planeta procedural orbital cargado (${planetResult.totalTriangles} triángulos).`);
+    }
 
     // 3. Bucle de renderizado
     let lastRenderTime = performance.now();
@@ -37,7 +53,7 @@ async function bootstrap() {
       lastRenderTime = now;
       telemetry.recordFrameTime(delta);
 
-      scene.render();
+      activeScene.render();
 
       const stats = telemetry.getFrameStats();
       if (stats && hudFps) {
