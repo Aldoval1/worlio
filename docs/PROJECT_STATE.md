@@ -1,9 +1,9 @@
 # Estado Operacional del Proyecto — Universo RTS
 
 **Archivo:** `docs/PROJECT_STATE.md`  
-**Última Actualización:** 2026-10-12 21:35 UTC  
+**Última Actualización:** 2026-10-12 21:42 UTC  
 **Fase Actual:** FASE 1 · VIABILIDAD DEL MUNDO 3D  
-**Ticket Activo:** T14 — Topología de chunks, teselas y vecinos de seis caras  
+**Ticket Activo:** T15 — LOD dinámico, quadtree, histéresis y presupuesto de streaming  
 **Rama Git:** `main`
 
 ---
@@ -17,7 +17,7 @@
   - Monorepo pnpm configurado (`@universo/shared`, `@universo/worldgen`, `@universo/domain`, `@universo/server`, `@universo/client`).
 - [x] **Calidad y Pipeline:**
   - TypeScript project references (`tsc -b`) compilando limpiamente sin errores.
-  - Suite de pruebas automatizadas con Vitest ejecutando 49 pruebas unitarias aprobadas.
+  - Suite de pruebas automatizadas con Vitest ejecutando 62 pruebas unitarias aprobadas (13 suites).
   - CI de GitHub Actions configurado en `.github/workflows/ci.yml`.
   - Zod schemas en runtime para contratos de red y mensajes de cliente-servidor.
   - Telemetría percentil (`p50`, `p90`, `p99`) y validador de catálogo de activos.
@@ -28,6 +28,7 @@
   - Geometría Cube-Sphere de 6 caras ($R = 125.000\text{ m}$) con concha oceánica esférica continua y sampling de biomas determinista.
   - Precisión numérica doble en CPU (`number` IEEE-754), coordenadas geodésicas y marcos tangentes ENU locales.
   - Floating Origin Manager en cliente con rebase a 2.000 m y clipping adaptativo de $0.1\text{ m}$ a $1.000.000\text{ m}$ mitigando jitter en GPU Float32.
+  - Topología de teselas y quadtree por cara (`tileId` canónico, grid diádica $33 \times 33$, 24 transiciones inter-cara y detector de grietas verificado $< 0.1\text{ mm}$).
 
 ---
 
@@ -46,7 +47,7 @@
 |   Fase    | Nombre                           | Total Tickets | Completados |           Estado            |
 | :-------: | :------------------------------- | :-----------: | :---------: | :-------------------------: |
 |   **0**   | **PREPRODUCCIÓN**                |       8       |      8      |   🟢 COMPLETADA AL 100%     |
-|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |      5      | 🟡 EN PROGRESO (T14 activo) |
+|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |      6      | 🟡 EN PROGRESO (T15 activo) |
 |     2     | VERTICAL SLICE URBANO            |       7       |      0      |        ⚪ PENDIENTE         |
 |     3     | DOMINIO ECONÓMICO                |      10       |      0      |        ⚪ PENDIENTE         |
 |     4     | MULTIJUGADOR, ROLES Y POLÍTICA   |       7       |      0      |        ⚪ PENDIENTE         |
@@ -54,7 +55,7 @@
 |     6     | PLANETA DINÁMICO Y ESCALA        |       4       |      0      |        ⚪ PENDIENTE         |
 |     7     | ESPACIO E INTERESTELAR           |       4       |      0      |        ⚪ PENDIENTE         |
 |     8     | PRODUCCIÓN, PULIDO Y LANZAMIENTO |       7       |      0      |        ⚪ PENDIENTE         |
-| **Total** | **Ciclo Completo**               |    **64**     |   **13**    |       **20.3% General**     |
+| **Total** | **Ciclo Completo**               |    **64**     |   **14**    |       **21.9% General**     |
 
 ---
 
@@ -62,13 +63,14 @@
 
 - [x] **T09:** Inicialización asíncrona de Babylon.js WebGPU, pantalla de soporte y benchmark base.
 - [x] **T10:** Instanciado masivo y presupuesto GPU (Thin Instances 10k entidades).
-- [x] **T11:** Generación planetaria procedural determinista y muestreo de terreno.
+- [x] **T11:** Generador de planeta por seeds y versión.
 - [x] **T12:** Cube-sphere, océanos y escena orbital procedural.
 - [x] **T13:** Precisión global, ancla local y floating origin.
+- [x] **T14:** Topología de chunks, teselas y vecinos de seis caras.
 
 ---
 
 ## 5. Próximos Pasos Inmediatos
 
-1. Ejecutar **T14 — Topología de chunks, teselas y vecinos de seis caras** (`packages/worldgen/src/tiles`, identificador `tileId`, grid diádica $33 \times 33$, vecinos intra/inter-cara y cosido de bordes).
-2. Continuar con **T15 — LOD dinámico, quadtree, histéresis y presupuesto de streaming**.
+1. Ejecutar **T15 — LOD dinámico, quadtree, histéresis y presupuesto de streaming**.
+2. Continuar con **T16 — Cámara Cesium-feel con picking de región y zoom por altura**.

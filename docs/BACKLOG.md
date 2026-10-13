@@ -67,8 +67,8 @@
 - [x] **T13 — Precisión global, ancla local y floating origin**
   - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T11, T12 | _Estado:_ DONE
   - _Criterio:_ CPU en double precision (`number`), GPU con anclas locales de tile; eliminación total de jitter al viajar 125 km.
-- [ ] **T14 — Topología de chunks, teselas y vecinos de seis caras**
-  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T12, T13 | _Estado:_ PENDING
+- [x] **T14 — Topología de chunks, teselas y vecinos de seis caras**
+  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T12, T13 | _Estado:_ DONE
   - _Criterio:_ Quadtree por cara, grid diádica $33\times 33$; muestreo unificado en límites intercara sin agujeros ni grietas.
 - [ ] **T15 — LOD dinámico, malla cosida y presupuestos**
   - _Prioridad:_ P0 | _Banda:_ XL | _Dependencia:_ T14, T13, T06 | _Estado:_ PENDING
