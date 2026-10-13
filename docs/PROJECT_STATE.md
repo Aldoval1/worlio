@@ -33,7 +33,7 @@
 ## 3. Estado de Fases
 | Fase | Nombre | Total Tickets | Completados | Estado |
 | :---: | :--- | :---: | :---: | :---: |
-| **0** | **PREPRODUCCIÓN** | 8 | 1 | 🟡 EN PROGRESO (T02 activo) |
+| **0** | **PREPRODUCCIÓN** | 8 | 2 | 🟡 EN PROGRESO (T03 activo) |
 | 1 | VIABILIDAD DEL MUNDO 3D | 12 | 0 | ⚪ PENDIENTE |
 | 2 | VERTICAL SLICE URBANO | 7 | 0 | ⚪ PENDIENTE |
 | 3 | DOMINIO ECONÓMICO | 10 | 0 | ⚪ PENDIENTE |

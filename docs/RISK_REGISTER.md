@@ -14,8 +14,9 @@
 | **R-04** | **Incompatibilidad de WebGPU en navegadores de usuarios** | Media | Alto | **P0** | Detección limpia con pantalla de bienvenida/diagnóstico explicativa; no fallback WebGL2 (ADR-0001). |
 | **R-05** | **Explosión de tráfico de red al hacer zoom out a órbita** | Alta | Alto | **P0** | Gestión de área de interés (AOI) y niveles de agregación: en órbita solo se reciben datos regionales agregados, no el estado individual de cada carreta (T39). |
 | **R-06** | **Coste operativo insostenible de simulación persistente 24/7** | Media | Alto | **P1** | Simulación por colas de eventos futuros (event queue con deadlines), evitando calcular física cuadro a cuadro de entidades lejanas a cualquier jugador (T36). |
-| **R-07** | **Conflictos políticos y vacíos de poder por líderes inactivos** | Alta | Medio | **P1** | Mecanismo de secesión municipal unilateral inmutable (ADR-0007) y reglas de caducidad de mandatos en constituciones. |
+| **R-07** | **Conflictos políticos y vacíos de poder por líderes inactivos** | Alta | Medio | **P1** | Mecanismo de secesión municipal unilateral inmutable (ADR-0007), reglas de caducidad de mandatos en constituciones y reasignación automática de ciudades abandonadas tras 14 días. |
 | **R-08** | **Infracción involuntaria de licencias en assets o texturas** | Baja | Crítico | **P0** | Pipeline estricto de auditoría de licencias (`docs/ASSET_LICENSES.md`) prohibiendo texturas comerciales de Google Earth, Cesium o juegos de terceros (T07, T61). |
+| **R-09** | **Crecimiento desmedido de base de datos por historial de eventos** | Media | Medio | **P1** | Poda de eventos consolidados mediante snapshots periódicos semanales y archivo en almacenamiento frío. |
 
 ---
 
