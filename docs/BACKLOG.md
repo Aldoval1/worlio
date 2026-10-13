@@ -70,8 +70,8 @@
 - [x] **T14 — Topología de chunks, teselas y vecinos de seis caras**
   - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T12, T13 | _Estado:_ DONE
   - _Criterio:_ Quadtree por cara, grid diádica $33\times 33$; muestreo unificado en límites intercara sin agujeros ni grietas.
-- [ ] **T15 — LOD dinámico, malla cosida y presupuestos**
-  - _Prioridad:_ P0 | _Banda:_ XL | _Dependencia:_ T14, T13, T06 | _Estado:_ PENDING
+- [x] **T15 — LOD dinámico, malla cosida y presupuestos**
+  - _Prioridad:_ P0 | _Banda:_ XL | _Dependencia:_ T14, T13, T06 | _Estado:_ DONE
   - _Criterio:_ Refinamiento por error proyectado, histéresis, unión cosida (stitching), sustitución atómica padre $\rightarrow$ hijos.
 - [ ] **T16 — Cámara Cesium-feel con picking de región y zoom por altura**
   - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T12, T13 | _Estado:_ PENDING
