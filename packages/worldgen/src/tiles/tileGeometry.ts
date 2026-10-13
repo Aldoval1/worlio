@@ -76,40 +76,63 @@ export function generateTileGeometry(
       positions[vIdx * 3 + 1] = wy - localAnchor.y;
       positions[vIdx * 3 + 2] = wz - localAnchor.z;
 
-      normals[vIdx * 3] = d.x;
-      normals[vIdx * 3 + 1] = d.y;
-      normals[vIdx * 3 + 2] = d.z;
-
       heights[vIdx] = sample.heightMeters;
 
-      // Color de bioma
-      let cr = 0.196,
-        cg = 0.321,
-        cb = 0.204;
-      if (sample.isWater) {
-        cr = 0.055;
-        cg = 0.141;
-        cb = 0.263;
-      } else if (sample.biome === 'SNOW_PEAK') {
-        cr = 0.886;
-        cg = 0.914;
-        cb = 0.941;
-      } else if (sample.biome === 'ROCKY_MOUNTAIN') {
-        cr = 0.282;
-        cg = 0.306;
-        cb = 0.349;
-      } else if (sample.biome === 'DESERT') {
-        cr = 0.729;
-        cg = 0.616;
-        cb = 0.447;
-      }
-
-      colors[vIdx * 4] = cr;
-      colors[vIdx * 4 + 1] = cg;
-      colors[vIdx * 4 + 2] = cb;
-      colors[vIdx * 4 + 3] = 1.0;
+      // Color de bioma desde la paleta PBR
+      colors[vIdx * 4] = sample.color.r;
+      colors[vIdx * 4 + 1] = sample.color.g;
+      colors[vIdx * 4 + 2] = sample.color.b;
+      colors[vIdx * 4 + 3] = sample.color.a;
 
       vIdx++;
+    }
+  }
+
+  // Paso 2: Cálculo analítico de normales visuales topográficas por diferencias finitas en la malla
+  for (let j = 0; j <= subdivision; j++) {
+    for (let i = 0; i <= subdivision; i++) {
+      const idx = j * verticesPerEdge + i;
+
+      // Vecinos en eje U (horizontal)
+      const iPrev = Math.max(0, i - 1);
+      const iNext = Math.min(subdivision, i + 1);
+      const idxUPrev = (j * verticesPerEdge + iPrev) * 3;
+      const idxUNext = (j * verticesPerEdge + iNext) * 3;
+
+      const tuX = worldPositions[idxUNext]! - worldPositions[idxUPrev]!;
+      const tuY = worldPositions[idxUNext + 1]! - worldPositions[idxUPrev + 1]!;
+      const tuZ = worldPositions[idxUNext + 2]! - worldPositions[idxUPrev + 2]!;
+
+      // Vecinos en eje V (vertical)
+      const jPrev = Math.max(0, j - 1);
+      const jNext = Math.min(subdivision, j + 1);
+      const idxVPrev = (jPrev * verticesPerEdge + i) * 3;
+      const idxVNext = (jNext * verticesPerEdge + i) * 3;
+
+      const tvX = worldPositions[idxVNext]! - worldPositions[idxVPrev]!;
+      const tvY = worldPositions[idxVNext + 1]! - worldPositions[idxVPrev + 1]!;
+      const tvZ = worldPositions[idxVNext + 2]! - worldPositions[idxVPrev + 2]!;
+
+      // Producto cruzado: N = Tu x Tv
+      let nx = tuY * tvZ - tuZ * tvY;
+      let ny = tuZ * tvX - tuX * tvZ;
+      let nz = tuX * tvY - tuY * tvX;
+
+      // Asegurar que apunte hacia el exterior del planeta (mismo hemisferio que la posición radial)
+      const rx = worldPositions[idx * 3]!;
+      const ry = worldPositions[idx * 3 + 1]!;
+      const rz = worldPositions[idx * 3 + 2]!;
+      const dotRadial = nx * rx + ny * ry + nz * rz;
+      if (dotRadial < 0) {
+        nx = -nx;
+        ny = -ny;
+        nz = -nz;
+      }
+
+      const nLen = Math.max(1e-6, Math.hypot(nx, ny, nz));
+      normals[idx * 3] = nx / nLen;
+      normals[idx * 3 + 1] = ny / nLen;
+      normals[idx * 3 + 2] = nz / nLen;
     }
   }
 

@@ -113,29 +113,57 @@ export function generateCubeSphereFaceGeometry(
       oceanPositions[vIdx * 3 + 1] = d.y * rOcean;
       oceanPositions[vIdx * 3 + 2] = d.z * rOcean;
 
-      // Normal base apuntando hacia afuera
-      normals[vIdx * 3] = d.x;
-      normals[vIdx * 3 + 1] = d.y;
-      normals[vIdx * 3 + 2] = d.z;
-
-      // Asignar color por bioma (RGBA)
-      let r = 0.196, g = 0.321, b = 0.204; // Templado verde
-      if (sample.isWater) {
-        r = 0.055; g = 0.141; b = 0.263; // Azul marino #0E2443
-      } else if (sample.biome === 'SNOW_PEAK') {
-        r = 0.886; g = 0.914; b = 0.941; // Nieve
-      } else if (sample.biome === 'ROCKY_MOUNTAIN') {
-        r = 0.282; g = 0.306; b = 0.349; // Roca gris
-      } else if (sample.biome === 'DESERT') {
-        r = 0.729; g = 0.616; b = 0.447; // Arena
-      }
-
-      colors[vIdx * 4] = r;
-      colors[vIdx * 4 + 1] = g;
-      colors[vIdx * 4 + 2] = b;
-      colors[vIdx * 4 + 3] = 1.0;
+      // Asignar color por bioma (RGBA) desde la paleta PBR
+      colors[vIdx * 4] = sample.color.r;
+      colors[vIdx * 4 + 1] = sample.color.g;
+      colors[vIdx * 4 + 2] = sample.color.b;
+      colors[vIdx * 4 + 3] = sample.color.a;
 
       vIdx++;
+    }
+  }
+
+  // Cálculo analítico de normales visuales del relieve por diferencias finitas
+  for (let j = 0; j <= subdivision; j++) {
+    for (let i = 0; i <= subdivision; i++) {
+      const idx = j * verticesPerSide + i;
+
+      const iPrev = Math.max(0, i - 1);
+      const iNext = Math.min(subdivision, i + 1);
+      const idxUPrev = (j * verticesPerSide + iPrev) * 3;
+      const idxUNext = (j * verticesPerSide + iNext) * 3;
+
+      const tuX = positions[idxUNext]! - positions[idxUPrev]!;
+      const tuY = positions[idxUNext + 1]! - positions[idxUPrev + 1]!;
+      const tuZ = positions[idxUNext + 2]! - positions[idxUPrev + 2]!;
+
+      const jPrev = Math.max(0, j - 1);
+      const jNext = Math.min(subdivision, j + 1);
+      const idxVPrev = (jPrev * verticesPerSide + i) * 3;
+      const idxVNext = (jNext * verticesPerSide + i) * 3;
+
+      const tvX = positions[idxVNext]! - positions[idxVPrev]!;
+      const tvY = positions[idxVNext + 1]! - positions[idxVPrev + 1]!;
+      const tvZ = positions[idxVNext + 2]! - positions[idxVPrev + 2]!;
+
+      let nx = tuY * tvZ - tuZ * tvY;
+      let ny = tuZ * tvX - tuX * tvZ;
+      let nz = tuX * tvY - tuY * tvX;
+
+      const rx = positions[idx * 3]!;
+      const ry = positions[idx * 3 + 1]!;
+      const rz = positions[idx * 3 + 2]!;
+      const dotRadial = nx * rx + ny * ry + nz * rz;
+      if (dotRadial < 0) {
+        nx = -nx;
+        ny = -ny;
+        nz = -nz;
+      }
+
+      const nLen = Math.max(1e-6, Math.hypot(nx, ny, nz));
+      normals[idx * 3] = nx / nLen;
+      normals[idx * 3 + 1] = ny / nLen;
+      normals[idx * 3 + 2] = nz / nLen;
     }
   }
 

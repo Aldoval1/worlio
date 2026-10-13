@@ -1,9 +1,9 @@
 # Estado Operacional del Proyecto — Universo RTS
 
 **Archivo:** `docs/PROJECT_STATE.md`  
-**Última Actualización:** 2026-10-12 22:05 UTC  
+**Última Actualización:** 2026-10-12 22:10 UTC  
 **Fase Actual:** FASE 1 · VIABILIDAD DEL MUNDO 3D  
-**Ticket Activo:** T19 — Biomas, materialidad y normal visual a todas las escalas  
+**Ticket Activo:** T20 — Persistencia de ediciones de relieve, carreteras y agotamiento  
 **Rama Git:** `main`
 
 ---
@@ -17,7 +17,7 @@
   - Monorepo pnpm configurado (`@universo/shared`, `@universo/worldgen`, `@universo/domain`, `@universo/server`, `@universo/client`).
 - [x] **Calidad y Pipeline:**
   - TypeScript project references (`tsc -b`) compilando limpiamente sin errores.
-  - Suite de pruebas automatizadas con Vitest ejecutando 98 pruebas unitarias aprobadas (17 suites).
+  - Suite de pruebas automatizadas con Vitest ejecutando 110 pruebas unitarias aprobadas (18 suites).
   - CI de GitHub Actions configurado en `.github/workflows/ci.yml`.
   - Zod schemas en runtime para contratos de red y mensajes de cliente-servidor.
   - Telemetría percentil (`p50`, `p90`, `p99`) y validador de catálogo de activos.
@@ -33,6 +33,7 @@
   - Navegación de cámara Cesium-feel (`OrbitalCameraController`, zoom logarítmico proporcional a altitud $300\text{ km} \to 2\text{ m}$, ray picking analítico, anclaje geográfico al cursor y vector UP estable sin gimbal lock).
   - Transición continua órbita-región (`TransitionCoordinator`, Slerp de cuaterniones, niebla atmosférica diurna $80\text{ km} \to 2\text{ km}$, horizonte físico y planos de corte dinámicos anti z-fighting).
   - Navegación al suelo a 2 metros (`queryGroundUnderPosition`, `resolveGroundCollision` clamp $\ge 2.0\text{ m}$, deflexión tangencial en pendientes `slideAlongSlope` y controlador `RtsCameraController` con seguimiento de contorno del terreno).
+  - Bioclimatología de Whittaker, paleta PBR sobria (12 biomas con albedos físicos, rugosidades y metalicidad) y normales topográficas analíticas $(\mathbf{T}_u \times \mathbf{T}_v)$ a todas las escalas para iluminación solar real.
 
 ---
 
@@ -51,7 +52,7 @@
 |   Fase    | Nombre                           | Total Tickets | Completados |           Estado            |
 | :-------: | :------------------------------- | :-----------: | :---------: | :-------------------------: |
 |   **0**   | **PREPRODUCCIÓN**                |       8       |      8      |   🟢 COMPLETADA AL 100%     |
-|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |     10      | 🟡 EN PROGRESO (T19 activo) |
+|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |     11      | 🟡 EN PROGRESO (T20 activo) |
 |     2     | VERTICAL SLICE URBANO            |       7       |      0      |        ⚪ PENDIENTE         |
 |     3     | DOMINIO ECONÓMICO                |      10       |      0      |        ⚪ PENDIENTE         |
 |     4     | MULTIJUGADOR, ROLES Y POLÍTICA   |       7       |      0      |        ⚪ PENDIENTE         |
@@ -59,7 +60,7 @@
 |     6     | PLANETA DINÁMICO Y ESCALA        |       4       |      0      |        ⚪ PENDIENTE         |
 |     7     | ESPACIO E INTERESTELAR           |       4       |      0      |        ⚪ PENDIENTE         |
 |     8     | PRODUCCIÓN, PULIDO Y LANZAMIENTO |       7       |      0      |        ⚪ PENDIENTE         |
-| **Total** | **Ciclo Completo**               |    **64**     |   **18**    |       **28.1% General**     |
+| **Total** | **Ciclo Completo**               |    **64**     |   **19**    |       **29.7% General**     |
 
 ---
 
@@ -75,10 +76,11 @@
 - [x] **T16:** Cámara Cesium-feel con picking de región y zoom por altura.
 - [x] **T17:** Transición orbital-regional y horizonte físico.
 - [x] **T18:** Navegación al suelo a 2m, colisión y deslizamiento en pendientes.
+- [x] **T19:** Biomas, materialidad PBR y normal visual a todas las escalas.
 
 ---
 
 ## 5. Próximos Pasos Inmediatos
 
-1. Ejecutar **T19 — Biomas, materialidad y normal visual a todas las escalas**.
-2. Continuar con **T20 — Persistencia de ediciones de relieve, carreteras y agotamiento** (cierre de Fase 1).
+1. Ejecutar **T20 — Persistencia de ediciones de relieve, carreteras y agotamiento** (`packages/domain`, `apps/server`, deltas de tesela en SQLite WAL, cierre de Fase 1).
+2. Comenzar **FASE 2 · VERTICAL SLICE URBANO** con **T21 — Editor de carreteras curvas y conectividad vial**.
