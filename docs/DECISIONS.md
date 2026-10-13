@@ -1,10 +1,12 @@
 # Registro de Decisiones de Arquitectura (ADR) — Universo RTS
+
 **Archivo:** `docs/DECISIONS.md`  
 **Estándar:** Contexto, Opciones, Decisión, Consecuencias, Capacidad de Reversión
 
 ---
 
 ## ADR-0001: Adopción Exclusiva de WebGPU con Babylon.js WebGPUEngine
+
 - **Estado:** [C] CONFIRMADO
 - **Fecha:** 2026-10-12
 - **Contexto:** El proyecto demanda renderizado planetario masivo a gran escala (250 km de diámetro), instanciado masivo de edificios (10.000+ thin instances), frustum culling acelerado por GPU y shaders WGSL avanzados. WebGL2 presenta cuellos de botella severos en draw calls y carece de compute shaders nativos.
@@ -19,6 +21,7 @@
 ---
 
 ## ADR-0002: Arquitectura Monorepo pnpm con TypeScript Estricto
+
 - **Estado:** [C] CONFIRMADO
 - **Fecha:** 2026-10-12
 - **Contexto:** El cliente 3D y el servidor deben compartir definiciones de tipos, esquemas de validación, fórmulas matemáticas deterministas y generadores procedurales sin duplicar código ni publicar paquetes en npm público.
@@ -33,6 +36,7 @@
 ---
 
 ## ADR-0003: Servidor Autoritativo Estricto y Protocolo WebSocket Versionado
+
 - **Estado:** [C] CONFIRMADO
 - **Fecha:** 2026-10-12
 - **Contexto:** En un MMO-RTS persistente, los clientes no pueden tener autoridad sobre los inventarios, la posición de ejércitos o la finalización de obras para prevenir trampas y desincronización.
@@ -47,6 +51,7 @@
 ---
 
 ## ADR-0004: Coordenadas Right-Handed, Y-Up en Metros y Floating Origin
+
 - **Estado:** [C] CONFIRMADO
 - **Fecha:** 2026-10-12
 - **Contexto:** Un planeta de 250 km de diámetro (radio 125.000 m) genera pérdida de precisión si se utilizan coordenadas Float32 directamente en GPU al nivel del suelo (jitter visible de milímetros a centímetros).
@@ -61,6 +66,7 @@
 ---
 
 ## ADR-0005: Economía Física Material y Cero Teletransporte
+
 - **Estado:** [C] CONFIRMADO
 - **Fecha:** 2026-10-12
 - **Contexto:** Los RTS tradicionales tratan los recursos como variables numéricas mágicas en la interfaz. Universo RTS busca que la logística y las líneas de suministro sean el centro de la estrategia militar y urbana.
@@ -74,6 +80,7 @@
 ---
 
 ## ADR-0006: Persistencia Híbrida Snapshot + Event Log con SQLite WAL
+
 - **Estado:** [A] ACEPTADO
 - **Fecha:** 2026-10-12
 - **Contexto:** El mundo debe sobrevivir a caídas y reinicios sin perder progreso ni duplicar mercancías.
@@ -88,6 +95,7 @@
 ---
 
 ## ADR-0007: Derecho Inmutable a la Secesión Municipal Unilateral
+
 - **Estado:** [C] CONFIRMADO
 - **Fecha:** 2026-10-12
 - **Contexto:** Evitar que jugadores tiránicos o reyes ausentes bloqueen indefinidamente el progreso de los municipios gestionados por alcaldes activos.

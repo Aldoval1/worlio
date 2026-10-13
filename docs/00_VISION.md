@@ -1,4 +1,5 @@
 # Universo RTS — Visión, GDD y Requisitos Maestros
+
 **Documento:** `docs/00_VISION.md`  
 **Edición:** Octubre 2026  
 **Estado:** [C] CONFIRMADO (Línea Base Maestro)
@@ -6,7 +7,9 @@
 ---
 
 ## 1. Declaración de Visión y North Star
+
 **Universo RTS** es un videojuego comercial MMO-RTS y constructor de ciudades 3D persistente en navegador web:
+
 - **Un único universo compartido:** Un cosmos continuo donde planetas, estrellas, naciones, ciudades, carreteras, ejércitos y almacenes mantienen su identidad y coordenadas físicas sin importar el nivel de zoom o la escala de observación.
 - **Planetas esféricos procedurales:** Cuerpos celestes con diámetro conceptual de 250 km (radio 125.000 m), generados mediante cube-sphere determinista, con zoom continuo desde la órbita espacial hasta el nivel del suelo (2 metros sobre la superficie).
 - **Ciudades y empresas privadas:** Jugadores en roles de alcaldes y gobernadores planifican infraestructuras, carreteras, almacenes y servicios; las empresas privadas construyen viviendas, comercios e industrias de forma automatizada según demanda, acceso vial y suministros reales.
@@ -18,17 +21,19 @@
 ---
 
 ## 2. Referentes de Diseño y Distinción
-| Referente | Mecánica Inspiradora | Lo que Universo RTS Hace Distinto |
-| :--- | :--- | :--- |
-| **Cities: Skylines** | Trazado libre de carreteras, zonificación R/C/I y redes de servicios. | Multijugador masivo en un planeta esférico real; las ciudades se interconectan económicamente y políticamente con otras naciones de jugadores. |
-| **Age of Empires** | Gestión de materias primas, cuarteles, progresión de eras y árboles tecnológicos. | La economía no es un contador mágico centralizado en pantalla; los recursos deben extraerse, almacenarse y transportarse físicamente. |
-| **Hearts of Iron IV** | Producción industrial, plantillas militares, frentes estratégicos y logística militar. | Interfaz accesible en tiempo real persistente; tropas consumen suministros físicos transportados desde almacenes reales. |
-| **Call of War** | Persistencia 24/7 en tiempo real con órdenes estratégicas de largo plazo. | Mundo completamente 3D en WebGPU, política cooperativa entre ciudadanos y un solo universo compartido sin resets arbitrarios. |
-| **Stellaris / Spore** | Exploración galáctica, diplomacia interestelar y colonización de nuevos mundos. | Continuidad geométrica absoluta: viajar de una choza neolítica a un puerto espacial y colonizar otro planeta sin pantallas de carga ni saltos de escena. |
+
+| Referente             | Mecánica Inspiradora                                                                   | Lo que Universo RTS Hace Distinto                                                                                                                        |
+| :-------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Cities: Skylines**  | Trazado libre de carreteras, zonificación R/C/I y redes de servicios.                  | Multijugador masivo en un planeta esférico real; las ciudades se interconectan económicamente y políticamente con otras naciones de jugadores.           |
+| **Age of Empires**    | Gestión de materias primas, cuarteles, progresión de eras y árboles tecnológicos.      | La economía no es un contador mágico centralizado en pantalla; los recursos deben extraerse, almacenarse y transportarse físicamente.                    |
+| **Hearts of Iron IV** | Producción industrial, plantillas militares, frentes estratégicos y logística militar. | Interfaz accesible en tiempo real persistente; tropas consumen suministros físicos transportados desde almacenes reales.                                 |
+| **Call of War**       | Persistencia 24/7 en tiempo real con órdenes estratégicas de largo plazo.              | Mundo completamente 3D en WebGPU, política cooperativa entre ciudadanos y un solo universo compartido sin resets arbitrarios.                            |
+| **Stellaris / Spore** | Exploración galáctica, diplomacia interestelar y colonización de nuevos mundos.        | Continuidad geométrica absoluta: viajar de una choza neolítica a un puerto espacial y colonizar otro planeta sin pantallas de carga ni saltos de escena. |
 
 ---
 
 ## 3. Pilares de Experiencia
+
 1. **Continuidad Geográfica Multiescala:** Órbita $\rightarrow$ Región $\rightarrow$ Ciudad $\rightarrow$ Edificio sin crear mapas planos sustitutos.
 2. **Economía Físicamente Localizada:** Los inventarios existen en un almacén concreto; ningún recurso puede gastarse si no está físicamente disponible en el lugar de la obra o producción.
 3. **Poder Político con Consecuencias Reales:** Los roles de alcalde, general, canciller o fundador tienen competencias exclusivas y fiscalizables por constitución.
@@ -39,6 +44,7 @@
 ---
 
 ## 4. Requisitos Clasificados
+
 - **[C] Confirmados:**
   - Un único universo compartido y persistente 24/7.
   - Planetas de 250 km de diámetro (radio 125.000 m).
@@ -66,6 +72,7 @@
 ---
 
 ## 5. Diez Historias de Usuario Concretas
+
 1. **HU-01 (Navegación Continua):** Como observador, quiero rotar el planeta en órbita y descender suavemente con la rueda del ratón hasta 2 metros sobre una colina, para inspeccionar el terreno sin cambios bruscos ni pantallas de carga.
 2. **HU-02 (Trazado Vial):** Como alcalde, quiero trazar una carretera curva entre dos puntos del terreno, para que el sistema calcule pendientes, coste de materiales y genere la vía respetando la orografía.
 3. **HU-03 (Zonificación Urbana):** Como alcalde, quiero demarcar una zona residencial junto a una carretera pavimentada, para que ciudadanos y empresas privadas construyan viviendas acordes a la demanda y era actual.
@@ -80,6 +87,7 @@
 ---
 
 ## 6. Perfiles de Hardware Objetivo
+
 - **Perfil A (Target Recomendado - PC Escritorio / Portátil Potente):**
   - GPU: Apple Silicon (M1/M2/M3/M4) / NVIDIA RTX 3060 / AMD RX 6600 o superior.
   - Resolución: 1080p a 1440p, 60 FPS estables (frame budget $\le 16.6$ ms).
@@ -95,26 +103,27 @@
 ---
 
 ## 7. Árbol de Competencias por Eras
+
 1. **Etapa I (Primitiva):**
-   - *Paleolítico:* Talla de sílex, recolección, refugios de ramas, fuego, lanzas de madera.
-   - *Neolítico:* Agricultura básica, domesticación, cerámica, herramientas de piedra pulida, chozas de barro, empalizadas.
+   - _Paleolítico:_ Talla de sílex, recolección, refugios de ramas, fuego, lanzas de madera.
+   - _Neolítico:_ Agricultura básica, domesticación, cerámica, herramientas de piedra pulida, chozas de barro, empalizadas.
 2. **Etapa II (Antigua / Medieval):**
-   - *Bronce:* Metalurgia del cobre y estaño, rueda, carretas de bueyes, escritura cuneiforme, murallas de piedra.
-   - *Hierro:* Forja de hierro, calzadas adoquinadas, acueductos, catapultas, monedas de trueque regulado.
-   - *Clásica:* Filosofía, arquitectura monumental, falanges y legiones, navegación a vela de cabotaje.
-   - *Alta Edad Media:* Feudalismo, estribo, molinos de agua, castillos de sillería, caballería pesada.
-   - *Baja Edad Media:* Gremios artesanales, ballestas, altos hornos primitivos, universidades, pólvora temprana.
+   - _Bronce:_ Metalurgia del cobre y estaño, rueda, carretas de bueyes, escritura cuneiforme, murallas de piedra.
+   - _Hierro:_ Forja de hierro, calzadas adoquinadas, acueductos, catapultas, monedas de trueque regulado.
+   - _Clásica:_ Filosofía, arquitectura monumental, falanges y legiones, navegación a vela de cabotaje.
+   - _Alta Edad Media:_ Feudalismo, estribo, molinos de agua, castillos de sillería, caballería pesada.
+   - _Baja Edad Media:_ Gremios artesanales, ballestas, altos hornos primitivos, universidades, pólvora temprana.
 3. **Etapa III (Moderna Temprana):**
-   - *Renacimiento:* Imprenta, galeones oceánicos, bastiones abaluartados, contabilidad de doble entrada.
-   - *Exploración:* Navegación astronómica, rutas ultramarinas, mosquetes, cartografía global.
-   - *Ilustración:* Método científico, academias de ciencias, banca comercial, artillería moderna.
-   - *Primera Revolución Industrial:* Máquina de vapor, telares mecánicos, canales navegables, coque y hierro colado.
+   - _Renacimiento:_ Imprenta, galeones oceánicos, bastiones abaluartados, contabilidad de doble entrada.
+   - _Exploración:_ Navegación astronómica, rutas ultramarinas, mosquetes, cartografía global.
+   - _Ilustración:_ Método científico, academias de ciencias, banca comercial, artillería moderna.
+   - _Primera Revolución Industrial:_ Máquina de vapor, telares mecánicos, canales navegables, coque y hierro colado.
 4. **Etapa IV (Industrial / Tecnológica):**
-   - *Segunda Revolución Industrial:* Acero Bessemer, ferrocarril, electricidad, motor de combustión interna, telégrafo.
-   - *Atómica:* Fisión nuclear, aviación a reacción, radar, fertilizantes sintéticos, antibióticos.
-   - *Digital:* Transistores, computación, telecomunicaciones satelitales, automatización industrial, energías renovables.
+   - _Segunda Revolución Industrial:_ Acero Bessemer, ferrocarril, electricidad, motor de combustión interna, telégrafo.
+   - _Atómica:_ Fisión nuclear, aviación a reacción, radar, fertilizantes sintéticos, antibióticos.
+   - _Digital:_ Transistores, computación, telecomunicaciones satelitales, automatización industrial, energías renovables.
 5. **Etapa V (Futurista / Espacial):**
-   - *IA & Automatización Avanzada:* Robótica autónoma, síntesis de materiales, redes logísticas neuronales.
-   - *Fusión:* Reactores de fusión compactos, superconductores a temperatura ambiente.
-   - *Espacio Temprano:* Ascensores orbitales, bases lunares, minería de asteroides.
-   - *Interestelar:* Motores de curvatura/antimateria, terraformación de exoplanetas, créditos universales.
+   - _IA & Automatización Avanzada:_ Robótica autónoma, síntesis de materiales, redes logísticas neuronales.
+   - _Fusión:_ Reactores de fusión compactos, superconductores a temperatura ambiente.
+   - _Espacio Temprano:_ Ascensores orbitales, bases lunares, minería de asteroides.
+   - _Interestelar:_ Motores de curvatura/antimateria, terraformación de exoplanetas, créditos universales.

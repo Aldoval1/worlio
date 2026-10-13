@@ -1,10 +1,13 @@
 # Registro de Cambios de Desarrollo — Universo RTS
+
 **Archivo:** `docs/CHANGELOG_DEV.md`
 
 ---
 
 ## [Fase 0 - Preproducción] - 2026-10-12
+
 ### Añadido
+
 - **A0 & T01:** Inicialización del protocolo autónomo de desarrollo en `AGENTS.md`.
 - **docs/00_VISION.md:** Documento maestro de visión, pilares, 10 historias de usuario, perfiles de hardware y competencias por eras.
 - **docs/GDD.md:** Documento de diseño de juego con bucles de minutos/horas/días, progressive disclosure y roles.

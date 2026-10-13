@@ -1,10 +1,12 @@
 # Arquitectura Técnica de Referencia — Universo RTS
+
 **Archivo:** `docs/ARCHITECTURE.md`  
 **Edición:** Octubre 2026
 
 ---
 
 ## 1. Visión General: Monolito Modular con Autoridad Estricta
+
 La arquitectura de **Universo RTS** está diseñada como un monolito modular con separación limpia de dominios. El cliente es una capa de visualización e interacción sin autoridad económica, mientras que el servidor es la fuente única de verdad para la simulación persistente.
 
 ```
@@ -42,6 +44,7 @@ La arquitectura de **Universo RTS** está diseñada como un monolito modular con
 ---
 
 ## 2. Reglas de Aislamiento de Módulos
+
 1. **`/rendering` (Cliente 3D):**
    - Responsabilidad: Inicializar Babylon.js `WebGPUEngine`, gestionar escenas, luces, materiales PBR, mallas de chunks y cámara.
    - **Regla sagrada:** JAMÁS escribe recursos autoritativos, no altera saldos de inventario ni decide si una construcción está lista.
@@ -60,6 +63,7 @@ La arquitectura de **Universo RTS** está diseñada como un monolito modular con
 ---
 
 ## 3. Modelo de Coordenadas y Precisión Espacial
+
 - **Sistema de Coordenadas:** Mano derecha (Right-handed), Y-arriba (Y-up), unidades en metros.
 - **Planeta de 250 km de diámetro:** Radio base $R = 125.000\text{ m}$.
 - **Superficie Matemática:**
@@ -75,6 +79,7 @@ La arquitectura de **Universo RTS** está diseñada como un monolito modular con
 ---
 
 ## 4. Modelo Temporal Persistente
+
 1. **Tiempo Real UTC:** Timestamp estricto en milisegundos (`ISO-8601`) para auditoría y firmas de red.
 2. **Reloj de Simulación (Simulation Clock):** Ticks lógicos del servidor que procesan la cola de eventos programados (finalización de obras, llegada de convoyes). Si el servidor se apaga, al reiniciar calcula de forma determinista el tiempo transcurrido y aplica los eventos vencidos en orden cronológico.
 3. **Calendario Planetario:** Estaciones, ciclos día/noche locales derivados de la rotación y traslación planetaria ficticia.
