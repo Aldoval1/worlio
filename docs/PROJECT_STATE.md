@@ -1,9 +1,9 @@
 # Estado Operacional del Proyecto — Universo RTS
 
 **Archivo:** `docs/PROJECT_STATE.md`  
-**Última Actualización:** 2026-10-12 22:20 UTC  
+**Última Actualización:** 2026-10-12 22:22 UTC  
 **Fase Actual:** FASE 2 · VERTICAL SLICE URBANO  
-**Ticket Activo:** T22 — Zonificación, parcelas y edificación privada automatizada  
+**Ticket Activo:** T23 — Construcción estratégica, fases de obra y reparación  
 **Rama Git:** `main`
 
 ---
@@ -17,7 +17,7 @@
   - Monorepo pnpm configurado (`@universo/shared`, `@universo/worldgen`, `@universo/domain`, `@universo/server`, `@universo/client`).
 - [x] **Calidad y Pipeline:**
   - TypeScript project references (`tsc -b`) compilando limpiamente sin errores.
-  - Suite de pruebas automatizadas con Vitest ejecutando 124 pruebas unitarias aprobadas (21 suites).
+  - Suite de pruebas automatizadas con Vitest ejecutando 130 pruebas unitarias aprobadas (22 suites).
   - CI de GitHub Actions configurado en `.github/workflows/ci.yml`.
   - Zod schemas en runtime para contratos de red y mensajes de cliente-servidor.
   - Telemetría percentil (`p50`, `p90`, `p99`) y validador de catálogo de activos.
@@ -43,6 +43,10 @@
   - Proyección de splines Catmull-Rom sobre terreno con offset anti z-fighting ($+0.12\text{ m}$).
   - Grafo vial determinista (`RoadNetworkGraph`) con auto-snapping a $5\text{ m}$, validación de pendientes máximas por calzada y enrutamiento óptimo A\*.
   - Constructor de mallas ribbon 3D (`createRoadRibbonMesh`) y controlador de edición interactivo (`RoadEditorController`).
+- [x] **Zonificación y Edificación Privada (T22):**
+  - Subdivisión continua de bordes viales en parcelas urbanas simétricas (`generateParcelsAlongRoad`).
+  - Zonificación Residencial, Comercial e Industrial (`assignZoningToParcel`).
+  - Motor de desarrollo inmobiliario privado (`simulatePrivateBuildingDevelopment`) condicionado a conexión vial real, capacidad laboral y reserva/consumo físico de materiales en almacén.
 
 ---
 
@@ -62,14 +66,14 @@
 | :-------: | :------------------------------- | :-----------: | :---------: | :-------------------------: |
 |   **0**   | **PREPRODUCCIÓN**                |       8       |      8      |   🟢 COMPLETADA AL 100%     |
 |   **1**   | **VIABILIDAD DEL MUNDO 3D**      |      12       |     12      |   🟢 COMPLETADA AL 100%     |
-|     2     | VERTICAL SLICE URBANO            |       7       |      1      | 🟡 EN PROGRESO (T22 activo) |
+|     2     | VERTICAL SLICE URBANO            |       7       |      2      | 🟡 EN PROGRESO (T23 activo) |
 |     3     | DOMINIO ECONÓMICO                |      10       |      0      |        ⚪ PENDIENTE         |
 |     4     | MULTIJUGADOR, ROLES Y POLÍTICA   |       7       |      0      |        ⚪ PENDIENTE         |
 |     5     | ESTRATEGIA Y CONFLICTO           |       5       |      0      |        ⚪ PENDIENTE         |
 |     6     | PLANETA DINÁMICO Y ESCALA        |       4       |      0      |        ⚪ PENDIENTE         |
 |     7     | ESPACIO E INTERESTELAR           |       4       |      0      |        ⚪ PENDIENTE         |
 |     8     | PRODUCCIÓN, PULIDO Y LANZAMIENTO |       7       |      0      |        ⚪ PENDIENTE         |
-| **Total** | **Ciclo Completo**               |    **64**     |   **21**    |       **32.8% General**     |
+| **Total** | **Ciclo Completo**               |    **64**     |   **22**    |       **34.4% General**     |
 
 ---
 
@@ -91,10 +95,11 @@
 
 ### Fase 2 · Vertical Slice Urbano
 - [x] **T21:** Editor de carreteras curvas y conectividad vial.
+- [x] **T22:** Zonificación, parcelas y edificación privada automatizada.
 
 ---
 
 ## 5. Próximos Pasos Inmediatos
 
-1. Ejecutar **T22 — Zonificación, parcelas y edificación privada automatizada** (Parcelas R/C/I, algoritmo privado construye edificios si hay carreteras, mano de obra y materiales).
-2. Continuar con **T23 — Construcción estratégica, fases de obra y reparación**.
+1. Ejecutar **T23 — Construcción estratégica, fases de obra y reparación** (Máquina de estados de obra, asignación de convoyes de materiales, mano de obra y progreso físico).
+2. Continuar con **T24 — Población por cohortes, empleo y vivienda**.

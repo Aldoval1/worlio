@@ -96,8 +96,8 @@
 - [x] **T21 — Editor de carreteras curvas y conectividad vial**
   - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T18, T20 | _Estado:_ DONE
   - _Criterio:_ Splines proyectadas sobre terreno; grafo determinista de nodos/aristas guardado en servidor.
-- [ ] **T22 — Zonificación, parcelas y edificación privada automatizada**
-  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T21, T07 | _Estado:_ PENDING
+- [x] **T22 — Zonificación, parcelas y edificación privada automatizada**
+  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T21, T07 | _Estado:_ DONE
   - _Criterio:_ Parcelas R/C/I; algoritmo privado construye edificios si hay carreteras, mano de obra y materiales.
 - [ ] **T23 — Construcción estratégica, fases de obra y reparación**
   - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T22, T28 | _Estado:_ PENDING
