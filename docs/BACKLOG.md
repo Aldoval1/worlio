@@ -79,8 +79,8 @@
 - [x] **T17 — Transición orbital-regional y horizonte físico**
   - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T15, T16 | _Estado:_ DONE
   - _Criterio:_ Coordinador único con cuaterniones; el planeta pasa de esfera a horizonte terrestre sin saltos de escena.
-- [ ] **T18 — Navegación al suelo y colisión de cámara**
-  - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T17, T15 | _Estado:_ PENDING
+- [x] **T18 — Navegación al suelo y colisión de cámara**
+  - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T17, T15 | _Estado:_ DONE
   - _Criterio:_ Descenso hasta 2 m sobre el suelo real; cámara collision contra terreno visible sin atravesar montañas.
 - [ ] **T19 — Biomas, materialidad y normal visual a todas las escalas**
   - _Prioridad:_ P1 | _Banda:_ M | _Dependencia:_ T15, T18, T07 | _Estado:_ PENDING
