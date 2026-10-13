@@ -1,4 +1,4 @@
-export type RoadType = 'DIRT_TRACK' | 'GRAVEL_ROAD' | 'PAVED_ROAD' | 'HIGHWAY';
+import type { RoadType } from '../roads/types.js';
 
 export interface TileTerrainModification {
   tileId: string;

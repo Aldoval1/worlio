@@ -93,8 +93,8 @@
 
 ## FASE 2 · VERTICAL SLICE URBANO
 
-- [ ] **T21 — Editor de carreteras curvas y conectividad vial**
-  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T18, T20 | _Estado:_ PENDING
+- [x] **T21 — Editor de carreteras curvas y conectividad vial**
+  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T18, T20 | _Estado:_ DONE
   - _Criterio:_ Splines proyectadas sobre terreno; grafo determinista de nodos/aristas guardado en servidor.
 - [ ] **T22 — Zonificación, parcelas y edificación privada automatizada**
   - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T21, T07 | _Estado:_ PENDING

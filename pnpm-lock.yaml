@@ -29,6 +29,9 @@ importers:
       '@babylonjs/loaders':
         specifier: ^7.30.0
         version: 7.54.3(@babylonjs/core@7.54.3)(babylonjs-gltf2interface@7.54.3)
+      '@universo/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
       '@universo/shared':
         specifier: workspace:*
         version: link:../../packages/shared

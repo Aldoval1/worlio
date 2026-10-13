@@ -1,9 +1,9 @@
 # Estado Operacional del Proyecto — Universo RTS
 
 **Archivo:** `docs/PROJECT_STATE.md`  
-**Última Actualización:** 2026-10-12 22:15 UTC  
+**Última Actualización:** 2026-10-12 22:20 UTC  
 **Fase Actual:** FASE 2 · VERTICAL SLICE URBANO  
-**Ticket Activo:** T21 — Editor de carreteras curvas y conectividad vial  
+**Ticket Activo:** T22 — Zonificación, parcelas y edificación privada automatizada  
 **Rama Git:** `main`
 
 ---
@@ -17,7 +17,7 @@
   - Monorepo pnpm configurado (`@universo/shared`, `@universo/worldgen`, `@universo/domain`, `@universo/server`, `@universo/client`).
 - [x] **Calidad y Pipeline:**
   - TypeScript project references (`tsc -b`) compilando limpiamente sin errores.
-  - Suite de pruebas automatizadas con Vitest ejecutando 115 pruebas unitarias aprobadas (19 suites).
+  - Suite de pruebas automatizadas con Vitest ejecutando 124 pruebas unitarias aprobadas (21 suites).
   - CI de GitHub Actions configurado en `.github/workflows/ci.yml`.
   - Zod schemas en runtime para contratos de red y mensajes de cliente-servidor.
   - Telemetría percentil (`p50`, `p90`, `p99`) y validador de catálogo de activos.
@@ -39,6 +39,10 @@
   - Versionado optimista por tesela e invalidación de caché.
   - Conservación física y no-duplicación de reservas ($R_{\text{current}} \ge 0$).
   - Supervivencia verificada a recarga de navegador y reinicio de servidor.
+- [x] **Infraestructura y Red Vial Urbana (T21):**
+  - Proyección de splines Catmull-Rom sobre terreno con offset anti z-fighting ($+0.12\text{ m}$).
+  - Grafo vial determinista (`RoadNetworkGraph`) con auto-snapping a $5\text{ m}$, validación de pendientes máximas por calzada y enrutamiento óptimo A\*.
+  - Constructor de mallas ribbon 3D (`createRoadRibbonMesh`) y controlador de edición interactivo (`RoadEditorController`).
 
 ---
 
@@ -58,19 +62,20 @@
 | :-------: | :------------------------------- | :-----------: | :---------: | :-------------------------: |
 |   **0**   | **PREPRODUCCIÓN**                |       8       |      8      |   🟢 COMPLETADA AL 100%     |
 |   **1**   | **VIABILIDAD DEL MUNDO 3D**      |      12       |     12      |   🟢 COMPLETADA AL 100%     |
-|     2     | VERTICAL SLICE URBANO            |       7       |      0      | 🟡 EN PROGRESO (T21 activo) |
+|     2     | VERTICAL SLICE URBANO            |       7       |      1      | 🟡 EN PROGRESO (T22 activo) |
 |     3     | DOMINIO ECONÓMICO                |      10       |      0      |        ⚪ PENDIENTE         |
 |     4     | MULTIJUGADOR, ROLES Y POLÍTICA   |       7       |      0      |        ⚪ PENDIENTE         |
 |     5     | ESTRATEGIA Y CONFLICTO           |       5       |      0      |        ⚪ PENDIENTE         |
 |     6     | PLANETA DINÁMICO Y ESCALA        |       4       |      0      |        ⚪ PENDIENTE         |
 |     7     | ESPACIO E INTERESTELAR           |       4       |      0      |        ⚪ PENDIENTE         |
 |     8     | PRODUCCIÓN, PULIDO Y LANZAMIENTO |       7       |      0      |        ⚪ PENDIENTE         |
-| **Total** | **Ciclo Completo**               |    **64**     |   **20**    |       **31.25% General**    |
+| **Total** | **Ciclo Completo**               |    **64**     |   **21**    |       **32.8% General**     |
 
 ---
 
-## 4. Tickets Completados de Fase 1 (100%)
+## 4. Tickets Completados
 
+### Fase 1 · Viabilidad del Mundo 3D (100%)
 - [x] **T09:** Inicialización asíncrona de Babylon.js WebGPU, pantalla de soporte y benchmark base.
 - [x] **T10:** Instanciado masivo y presupuesto GPU (Thin Instances 10k entidades).
 - [x] **T11:** Generador de planeta por seeds y versión.
@@ -84,9 +89,12 @@
 - [x] **T19:** Biomas, materialidad PBR y normal visual a todas las escalas.
 - [x] **T20:** Persistencia de ediciones de relieve, carreteras y agotamiento.
 
+### Fase 2 · Vertical Slice Urbano
+- [x] **T21:** Editor de carreteras curvas y conectividad vial.
+
 ---
 
 ## 5. Próximos Pasos Inmediatos
 
-1. Ejecutar **T21 — Editor de carreteras curvas y conectividad vial** (Splines proyectadas sobre terreno, grafo determinista de nodos/aristas guardado en servidor).
-2. Continuar con **T22 — Zonificación, parcelas y edificación privada automatizada**.
+1. Ejecutar **T22 — Zonificación, parcelas y edificación privada automatizada** (Parcelas R/C/I, algoritmo privado construye edificios si hay carreteras, mano de obra y materiales).
+2. Continuar con **T23 — Construcción estratégica, fases de obra y reparación**.

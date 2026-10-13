@@ -5,6 +5,10 @@
     "outDir": "./dist",
     "composite": true
   },
-  "references": [{ "path": "../../packages/shared" }, { "path": "../../packages/worldgen" }],
+  "references": [
+    { "path": "../../packages/shared" },
+    { "path": "../../packages/worldgen" },
+    { "path": "../../packages/domain" }
+  ],
   "include": ["src/**/*"]
 }

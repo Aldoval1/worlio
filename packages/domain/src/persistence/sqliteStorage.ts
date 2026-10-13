@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import initSqlJs, { type Database, type SqlJsStatic } from 'sql.js';
+import type { RoadType } from '../roads/types.js';
 import type {
   RoadSegment,
-  RoadType,
   TilePersistedState,
   TileResourceDeposit,
   TileTerrainModification
