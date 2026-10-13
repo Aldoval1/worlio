@@ -76,8 +76,8 @@
 - [x] **T16 — Cámara Cesium-feel con picking de región y zoom por altura**
   - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T12, T13 | _Estado:_ DONE
   - _Criterio:_ Zoom proporcional a altitud libre, anclaje geográfico al cursor, sin gimbal lock ni roll descontrolado.
-- [ ] **T17 — Transición orbital-regional y horizonte físico**
-  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T15, T16 | _Estado:_ PENDING
+- [x] **T17 — Transición orbital-regional y horizonte físico**
+  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T15, T16 | _Estado:_ DONE
   - _Criterio:_ Coordinador único con cuaterniones; el planeta pasa de esfera a horizonte terrestre sin saltos de escena.
 - [ ] **T18 — Navegación al suelo y colisión de cámara**
   - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T17, T15 | _Estado:_ PENDING

@@ -1,9 +1,9 @@
 # Estado Operacional del Proyecto — Universo RTS
 
 **Archivo:** `docs/PROJECT_STATE.md`  
-**Última Actualización:** 2026-10-12 21:54 UTC  
+**Última Actualización:** 2026-10-12 21:56 UTC  
 **Fase Actual:** FASE 1 · VIABILIDAD DEL MUNDO 3D  
-**Ticket Activo:** T17 — Transición orbital-regional y horizonte físico  
+**Ticket Activo:** T18 — Navegación al suelo y colisión de cámara  
 **Rama Git:** `main`
 
 ---
@@ -17,7 +17,7 @@
   - Monorepo pnpm configurado (`@universo/shared`, `@universo/worldgen`, `@universo/domain`, `@universo/server`, `@universo/client`).
 - [x] **Calidad y Pipeline:**
   - TypeScript project references (`tsc -b`) compilando limpiamente sin errores.
-  - Suite de pruebas automatizadas con Vitest ejecutando 79 pruebas unitarias aprobadas (15 suites).
+  - Suite de pruebas automatizadas con Vitest ejecutando 86 pruebas unitarias aprobadas (16 suites).
   - CI de GitHub Actions configurado en `.github/workflows/ci.yml`.
   - Zod schemas en runtime para contratos de red y mensajes de cliente-servidor.
   - Telemetría percentil (`p50`, `p90`, `p99`) y validador de catálogo de activos.
@@ -31,6 +31,7 @@
   - Topología de teselas y quadtree por cara (`tileId` canónico, grid diádica $33 \times 33$, 24 transiciones inter-cara y detector de grietas verificado $< 0.1\text{ mm}$).
   - LOD dinámico continuo (`LodQuadtree`, SSE proyectado, histéresis del 40%, sustitución atómica padre $\leftrightarrow$ hijos, balance 2:1, streaming cancelable y skirts).
   - Navegación de cámara Cesium-feel (`OrbitalCameraController`, zoom logarítmico proporcional a altitud $300\text{ km} \to 2\text{ m}$, ray picking analítico, anclaje geográfico al cursor y vector UP estable sin gimbal lock).
+  - Transición continua órbita-región (`TransitionCoordinator`, Slerp de cuaterniones, niebla atmosférica diurna $80\text{ km} \to 2\text{ km}$, horizonte físico y planos de corte dinámicos anti z-fighting).
 
 ---
 
@@ -49,7 +50,7 @@
 |   Fase    | Nombre                           | Total Tickets | Completados |           Estado            |
 | :-------: | :------------------------------- | :-----------: | :---------: | :-------------------------: |
 |   **0**   | **PREPRODUCCIÓN**                |       8       |      8      |   🟢 COMPLETADA AL 100%     |
-|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |      8      | 🟡 EN PROGRESO (T17 activo) |
+|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |      9      | 🟡 EN PROGRESO (T18 activo) |
 |     2     | VERTICAL SLICE URBANO            |       7       |      0      |        ⚪ PENDIENTE         |
 |     3     | DOMINIO ECONÓMICO                |      10       |      0      |        ⚪ PENDIENTE         |
 |     4     | MULTIJUGADOR, ROLES Y POLÍTICA   |       7       |      0      |        ⚪ PENDIENTE         |
@@ -57,7 +58,7 @@
 |     6     | PLANETA DINÁMICO Y ESCALA        |       4       |      0      |        ⚪ PENDIENTE         |
 |     7     | ESPACIO E INTERESTELAR           |       4       |      0      |        ⚪ PENDIENTE         |
 |     8     | PRODUCCIÓN, PULIDO Y LANZAMIENTO |       7       |      0      |        ⚪ PENDIENTE         |
-| **Total** | **Ciclo Completo**               |    **64**     |   **16**    |       **25.0% General**     |
+| **Total** | **Ciclo Completo**               |    **64**     |   **17**    |       **26.6% General**     |
 
 ---
 
@@ -71,10 +72,11 @@
 - [x] **T14:** Topología de chunks, teselas y vecinos de seis caras.
 - [x] **T15:** LOD dinámico, quadtree, histéresis y presupuesto de streaming.
 - [x] **T16:** Cámara Cesium-feel con picking de región y zoom por altura.
+- [x] **T17:** Transición orbital-regional y horizonte físico.
 
 ---
 
 ## 5. Próximos Pasos Inmediatos
 
-1. Ejecutar **T17 — Transición orbital-regional y horizonte físico** (coordinador de cuaterniones y niebla atmosférica continua).
-2. Continuar con **T18 — Navegación al suelo y colisión de cámara**.
+1. Ejecutar **T18 — Navegación al suelo y colisión de cámara** (`apps/client/src/navigation/groundCollision.ts`, raycast de altura, límite 2 m, deslizamiento por pendiente).
+2. Continuar con **T19 — Biomas, materialidad y normal visual a todas las escalas**.
