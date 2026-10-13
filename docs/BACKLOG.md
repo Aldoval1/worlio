@@ -52,20 +52,20 @@
 
 ## FASE 1 · VIABILIDAD DEL MUNDO 3D
 
-- [ ] **T09 — WebGPU exclusivo: motor, error compatible y primera escena**
-  - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T03, T04 | _Estado:_ PENDING
+- [x] **T09 — WebGPU exclusivo: motor, error compatible y primera escena**
+  - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T03, T04 | _Estado:_ DONE
   - _Criterio:_ Babylon.js WebGPUEngine inicializado asíncronamente; fallback visual de incompatibilidad probado; render loop right-handed.
-- [ ] **T10 — Thin Instances, instancing y benchmark 1.000/10.000**
-  - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T09, T06 | _Estado:_ PENDING
+- [x] **T10 — Thin Instances, instancing y benchmark 1.000/10.000**
+  - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T09, T06 | _Estado:_ DONE
   - _Criterio:_ 1.000 y 10.000 edificios instanciados en GPU; medición de draw calls, VRAM y picking parcial probado.
-- [ ] **T11 — Generador de planeta por seeds y versión**
-  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T05, T09 | _Estado:_ PENDING
+- [x] **T11 — Generador de planeta por seeds y versión**
+  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T05, T09 | _Estado:_ DONE
   - _Criterio:_ `PlanetDefinition`, ruido continuo 3D multioctava en dirección esférica; `sampleTerrain` determinista entre plataformas.
-- [ ] **T12 — Cube-sphere, océanos y escena orbital procedural**
-  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T11, T09 | _Estado:_ PENDING
+- [x] **T12 — Cube-sphere, océanos y escena orbital procedural**
+  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T11, T09 | _Estado:_ DONE
   - _Criterio:_ 6 caras proyectadas radialmente; océanos opacos al nivel del mar sin z-fighting; 3 seeds distinguidas como esferas sólidas.
-- [ ] **T13 — Precisión global, ancla local y floating origin**
-  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T11, T12 | _Estado:_ PENDING
+- [x] **T13 — Precisión global, ancla local y floating origin**
+  - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T11, T12 | _Estado:_ DONE
   - _Criterio:_ CPU en double precision (`number`), GPU con anclas locales de tile; eliminación total de jitter al viajar 125 km.
 - [ ] **T14 — Topología de chunks, teselas y vecinos de seis caras**
   - _Prioridad:_ P0 | _Banda:_ L | _Dependencia:_ T12, T13 | _Estado:_ PENDING

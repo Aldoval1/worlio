@@ -1,9 +1,9 @@
 # Estado Operacional del Proyecto — Universo RTS
 
 **Archivo:** `docs/PROJECT_STATE.md`  
-**Última Actualización:** 2026-10-12 19:55 UTC  
-**Fase Actual:** FASE 0 · PREPRODUCCIÓN  
-**Ticket Activo:** T01 — Visión, restricciones, referentes y GDD verificable  
+**Última Actualización:** 2026-10-12 21:35 UTC  
+**Fase Actual:** FASE 1 · VIABILIDAD DEL MUNDO 3D  
+**Ticket Activo:** T14 — Topología de chunks, teselas y vecinos de seis caras  
 **Rama Git:** `main`
 
 ---
@@ -12,14 +12,22 @@
 
 - [x] **Entorno Local y Runtimes:**
   - Node.js LTS `v20.18.0` instalado y operativo.
-  - pnpm `v12.11.2` instalado globalmente y operativo.
+  - pnpm `v12.11.2` instalado y operativo.
   - Git configurado con autor `Aaron Bacallao` y remoto `git@github.com:Aldoval1/worlio.git`.
-- [x] **Base de Despliegue en Railway:**
-  - Servidor Express en `server.js` preparado para Railway (`PORT` dinámico, `0.0.0.0`, `/health`, Dockerfile, railway.json).
-  - Repositorio inicial sincronizado con GitHub `origin/main` (commit `ade99cc`).
-- [x] **Prompt Maestro A0:**
-  - Directrices asumidas: Equipo virtual completo, disciplina epistemológica, modo autónomo activado, stop-authority fijada.
-  - Documentos base inicializados: `AGENTS.md`, `docs/00_VISION.md`.
+  - Monorepo pnpm configurado (`@universo/shared`, `@universo/worldgen`, `@universo/domain`, `@universo/server`, `@universo/client`).
+- [x] **Calidad y Pipeline:**
+  - TypeScript project references (`tsc -b`) compilando limpiamente sin errores.
+  - Suite de pruebas automatizadas con Vitest ejecutando 49 pruebas unitarias aprobadas.
+  - CI de GitHub Actions configurado en `.github/workflows/ci.yml`.
+  - Zod schemas en runtime para contratos de red y mensajes de cliente-servidor.
+  - Telemetría percentil (`p50`, `p90`, `p99`) y validador de catálogo de activos.
+  - UX tokens y máquina de estados del HUD progresivo (`HudStateMachine`).
+- [x] **Motor Gráfico WebGPU:**
+  - Babylon.js `WebGPUEngine` exclusivo con inicialización asíncrona y pantalla explícita de incompatibilidad.
+  - Benchmark de Thin Instances: 1.000 y 10.000 edificios en 1 único draw call con buffer de 640 KB.
+  - Geometría Cube-Sphere de 6 caras ($R = 125.000\text{ m}$) con concha oceánica esférica continua y sampling de biomas determinista.
+  - Precisión numérica doble en CPU (`number` IEEE-754), coordenadas geodésicas y marcos tangentes ENU locales.
+  - Floating Origin Manager en cliente con rebase a 2.000 m y clipping adaptativo de $0.1\text{ m}$ a $1.000.000\text{ m}$ mitigando jitter en GPU Float32.
 
 ---
 
@@ -38,7 +46,7 @@
 |   Fase    | Nombre                           | Total Tickets | Completados |           Estado            |
 | :-------: | :------------------------------- | :-----------: | :---------: | :-------------------------: |
 |   **0**   | **PREPRODUCCIÓN**                |       8       |      8      |   🟢 COMPLETADA AL 100%     |
-|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |      4      | 🟡 EN PROGRESO (T13 activo) |
+|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |      5      | 🟡 EN PROGRESO (T14 activo) |
 |     2     | VERTICAL SLICE URBANO            |       7       |      0      |        ⚪ PENDIENTE         |
 |     3     | DOMINIO ECONÓMICO                |      10       |      0      |        ⚪ PENDIENTE         |
 |     4     | MULTIJUGADOR, ROLES Y POLÍTICA   |       7       |      0      |        ⚪ PENDIENTE         |
@@ -46,11 +54,21 @@
 |     6     | PLANETA DINÁMICO Y ESCALA        |       4       |      0      |        ⚪ PENDIENTE         |
 |     7     | ESPACIO E INTERESTELAR           |       4       |      0      |        ⚪ PENDIENTE         |
 |     8     | PRODUCCIÓN, PULIDO Y LANZAMIENTO |       7       |      0      |        ⚪ PENDIENTE         |
-| **Total** | **Ciclo Completo**               |    **64**     |    **1**    |              —              |
+| **Total** | **Ciclo Completo**               |    **64**     |   **13**    |       **20.3% General**     |
 
 ---
 
-## 4. Próximos Pasos Inmediatos
+## 4. Tickets Completados de Fase 1
 
-1. Ejecutar **T02 — Producto mínimo, vertical slice y presupuesto de riesgos** (`docs/MILESTONES.md`, `docs/PRODUCT_METRICS.md`).
-2. Pasar de forma autónoma a **T03 — Repositorio, entorno reproducible y convenciones de código** (Scaffolding monorepo pnpm, TypeScript estricto, Babylon WebGPU, Node/ws).
+- [x] **T09:** Inicialización asíncrona de Babylon.js WebGPU, pantalla de soporte y benchmark base.
+- [x] **T10:** Instanciado masivo y presupuesto GPU (Thin Instances 10k entidades).
+- [x] **T11:** Generación planetaria procedural determinista y muestreo de terreno.
+- [x] **T12:** Cube-sphere, océanos y escena orbital procedural.
+- [x] **T13:** Precisión global, ancla local y floating origin.
+
+---
+
+## 5. Próximos Pasos Inmediatos
+
+1. Ejecutar **T14 — Topología de chunks, teselas y vecinos de seis caras** (`packages/worldgen/src/tiles`, identificador `tileId`, grid diádica $33 \times 33$, vecinos intra/inter-cara y cosido de bordes).
+2. Continuar con **T15 — LOD dinámico, quadtree, histéresis y presupuesto de streaming**.
