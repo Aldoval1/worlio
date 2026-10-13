@@ -63,14 +63,22 @@ async function bootstrap() {
   dirLight.diffuse = new Color3(1.0, 0.95, 0.8);
 
   // 6. Terreno de prueba (Plano 40x40m con material PBR / estándar estilizado)
-  const ground = MeshBuilder.CreateGround('cityGround', { width: 40, height: 40, subdivisions: 20 }, scene);
+  const ground = MeshBuilder.CreateGround(
+    'cityGround',
+    { width: 40, height: 40, subdivisions: 20 },
+    scene
+  );
   const groundMat = new StandardMaterial('groundMat', scene);
   groundMat.diffuseColor = new Color3(0.196, 0.321, 0.204); // #325234
   groundMat.specularColor = new Color3(0.05, 0.05, 0.05);
   ground.material = groundMat;
 
   // Representación visual del almacén central
-  const warehouse = MeshBuilder.CreateBox('almacenCentral', { width: 4, height: 2, depth: 3 }, scene);
+  const warehouse = MeshBuilder.CreateBox(
+    'almacenCentral',
+    { width: 4, height: 2, depth: 3 },
+    scene
+  );
   warehouse.position = new Vector3(0, 1, 0);
   const warehouseMat = new StandardMaterial('warehouseMat', scene);
   warehouseMat.diffuseColor = new Color3(0.4, 0.25, 0.15); // Madera oscura
@@ -125,11 +133,15 @@ async function bootstrap() {
       if (msg.type === 'SYNC_SNAPSHOT') {
         const madera = msg.inventories.find((i) => (i.resourceId as string) === 'madera');
         const piedra = msg.inventories.find((i) => (i.resourceId as string) === 'piedra');
-        if (invMadera && madera) invMadera.textContent = `${madera.quantity - madera.reserved} / ${madera.quantity}`;
-        if (invPiedra && piedra) invPiedra.textContent = `${piedra.quantity - piedra.reserved} / ${piedra.quantity}`;
+        if (invMadera && madera)
+          invMadera.textContent = `${madera.quantity - madera.reserved} / ${madera.quantity}`;
+        if (invPiedra && piedra)
+          invPiedra.textContent = `${piedra.quantity - piedra.reserved} / ${piedra.quantity}`;
       } else if (msg.type === 'EVENT_NOTIFICATION' && msg.eventType === 'INVENTORY_RESERVED') {
         const p = msg.payload as { lotId: string; amount: number; remainingAvailable: number };
-        console.log(`📦 Notificación: Reserva confirmada en lote ${p.lotId}: ${p.amount} unidades.`);
+        console.log(
+          `📦 Notificación: Reserva confirmada en lote ${p.lotId}: ${p.amount} unidades.`
+        );
         // Solicitar sync actualizado
         socket.send(JSON.stringify({ type: 'REQUEST_SYNC', planetId: 'terra-prime' }));
       }

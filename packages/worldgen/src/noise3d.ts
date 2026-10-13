@@ -78,18 +78,41 @@ export class DeterministicNoise3D {
       w,
       this.lerp(
         v,
-        this.lerp(u, this.grad(this.perm[AA]!, fx, fy, fz), this.grad(this.perm[BA]!, fx - 1, fy, fz)),
-        this.lerp(u, this.grad(this.perm[AB]!, fx, fy - 1, fz), this.grad(this.perm[BB]!, fx - 1, fy - 1, fz))
+        this.lerp(
+          u,
+          this.grad(this.perm[AA]!, fx, fy, fz),
+          this.grad(this.perm[BA]!, fx - 1, fy, fz)
+        ),
+        this.lerp(
+          u,
+          this.grad(this.perm[AB]!, fx, fy - 1, fz),
+          this.grad(this.perm[BB]!, fx - 1, fy - 1, fz)
+        )
       ),
       this.lerp(
         v,
-        this.lerp(u, this.grad(this.perm[AA + 1]!, fx, fy, fz - 1), this.grad(this.perm[BA + 1]!, fx - 1, fy, fz - 1)),
-        this.lerp(u, this.grad(this.perm[AB + 1]!, fx, fy - 1, fz - 1), this.grad(this.perm[BB + 1]!, fx - 1, fy - 1, fz - 1))
+        this.lerp(
+          u,
+          this.grad(this.perm[AA + 1]!, fx, fy, fz - 1),
+          this.grad(this.perm[BA + 1]!, fx - 1, fy, fz - 1)
+        ),
+        this.lerp(
+          u,
+          this.grad(this.perm[AB + 1]!, fx, fy - 1, fz - 1),
+          this.grad(this.perm[BB + 1]!, fx - 1, fy - 1, fz - 1)
+        )
       )
     );
   }
 
-  public fbm(x: number, y: number, z: number, octaves = 6, lacunarity = 2.0, persistence = 0.5): number {
+  public fbm(
+    x: number,
+    y: number,
+    z: number,
+    octaves = 6,
+    lacunarity = 2.0,
+    persistence = 0.5
+  ): number {
     let total = 0;
     let frequency = 1;
     let amplitude = 1;

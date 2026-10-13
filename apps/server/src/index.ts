@@ -18,6 +18,7 @@ import {
 } from '@universo/shared';
 import { InventoryDomainService, type InventoryLot } from '@universo/domain';
 import { TerrainSampler } from '@universo/worldgen';
+import { ServerTelemetryTracker } from './telemetry/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,6 +26,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const httpServer = createServer(app);
 const wss = new WebSocketServer({ server: httpServer });
+const telemetry = new ServerTelemetryTracker();
 
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = '0.0.0.0';
@@ -51,6 +53,10 @@ app.get('/health', (_req, res) => {
     uptimeSeconds: Math.floor(process.uptime()),
     timestamp: new Date().toISOString()
   });
+});
+
+app.get('/telemetry', (_req, res) => {
+  res.json(telemetry.getSnapshot());
 });
 
 app.get('/api/planet', (_req, res) => {
@@ -123,11 +129,13 @@ const epoch = Math.floor(Date.now() / 1000);
 
 // --- PROTOCOLO WEBSOCKET ---
 wss.on('connection', (ws: WebSocket) => {
+  telemetry.onConnectionOpened();
   console.log(`🔌 Cliente WebSocket conectado (Protocolo v${PROTOCOL_VERSION})`);
 
   ws.on('message', (data: Buffer | string) => {
     try {
       const msg: ClientMessage = JSON.parse(data.toString());
+      telemetry.recordCommandProcessed();
 
       switch (msg.type) {
         case 'PING': {
@@ -226,6 +234,7 @@ wss.on('connection', (ws: WebSocket) => {
   });
 
   ws.on('close', () => {
+    telemetry.onConnectionClosed();
     console.log('❌ Cliente WebSocket desconectado.');
   });
 });

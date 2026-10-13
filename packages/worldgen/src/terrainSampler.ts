@@ -16,8 +16,12 @@ export class TerrainSampler {
 
   constructor(planet: PlanetDefinition) {
     this.planet = planet;
-    this.continentalNoise = new DeterministicNoise3D(`${planet.seed}_continents_${planet.generatorVersion}`);
-    this.mountainNoise = new DeterministicNoise3D(`${planet.seed}_mountains_${planet.generatorVersion}`);
+    this.continentalNoise = new DeterministicNoise3D(
+      `${planet.seed}_continents_${planet.generatorVersion}`
+    );
+    this.mountainNoise = new DeterministicNoise3D(
+      `${planet.seed}_mountains_${planet.generatorVersion}`
+    );
     this.detailNoise = new DeterministicNoise3D(`${planet.seed}_detail_${planet.generatorVersion}`);
   }
 
