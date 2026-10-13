@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true
+  },
+  "files": [],
+  "references": [
+    { "path": "./packages/shared" },
+    { "path": "./packages/worldgen" },
+    { "path": "./packages/domain" },
+    { "path": "./apps/server" },
+    { "path": "./apps/client" }
+  ]
+}

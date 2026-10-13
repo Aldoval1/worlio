@@ -1,0 +1,21 @@
+{
+  "name": "@universo/client",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^7.30.0",
+    "@babylonjs/loaders": "^7.30.0",
+    "@universo/shared": "workspace:*",
+    "@universo/worldgen": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vite": "^5.4.8"
+  }
+}

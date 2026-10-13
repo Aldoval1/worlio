@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universo RTS — WebGPU 3D Persistent MMO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background-color: #071526; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #EAF2F7; }
+    #renderCanvas { width: 100vw; height: 100vh; display: block; touch-action: none; outline: none; }
+    .hud { position: absolute; top: 20px; left: 20px; width: 340px; background: rgba(13, 43, 73, 0.78); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 18px; box-shadow: 0 16px 36px rgba(0,0,0,0.6); z-index: 10; }
+    .hud-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 8px; }
+    .hud-title h1 { font-size: 1.15rem; font-weight: 800; letter-spacing: 1px; color: #FFFFFF; }
+    .badge { font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; background: rgba(20, 184, 166, 0.15); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.3); }
+    .stat-row { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px; color: #94A3B8; }
+    .stat-val { font-weight: 700; color: #EAF2F7; font-family: ui-monospace, monospace; }
+    .inv-panel { margin-top: 12px; background: rgba(0,0,0,0.25); border-radius: 8px; padding: 10px; }
+    .inv-item { display: flex; justify-content: space-between; font-size: 0.72rem; margin-bottom: 4px; }
+    .btn { width: 100%; margin-top: 10px; padding: 8px; font-size: 0.75rem; font-weight: 700; background: #14B8A6; color: #071526; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .btn:hover { background: #0d9488; }
+    .fallback-overlay { position: fixed; inset: 0; background: rgba(7, 21, 38, 0.96); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+    .fallback-card { max-width: 500px; background: #0D2B49; border: 1px solid rgba(217, 106, 100, 0.3); border-radius: 16px; padding: 30px; text-align: center; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <canvas id="renderCanvas"></canvas>
+
+  <div class="hud">
+    <div class="hud-title">
+      <h1>UNIVERSO RTS</h1>
+      <span class="badge">WebGPU Exclusivo</span>
+    </div>
+    <div class="stat-row">
+      <span>Planeta:</span>
+      <span class="stat-val" id="hud-planet">Terra Prime (250 km)</span>
+    </div>
+    <div class="stat-row">
+      <span>Motor 3D:</span>
+      <span class="stat-val" id="hud-engine">Babylon.js WebGPU</span>
+    </div>
+    <div class="stat-row">
+      <span>FPS (p50 / p95):</span>
+      <span class="stat-val" id="hud-fps">-- / --</span>
+    </div>
+    <div class="stat-row">
+      <span>Conexión Servidor:</span>
+      <span class="stat-val" id="hud-ws">Conectando...</span>
+    </div>
+
+    <div class="inv-panel">
+      <div style="font-size: 0.7rem; color: #64748B; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Almacén Físico Municipal</div>
+      <div class="inv-item">
+        <span>Madera:</span>
+        <span class="stat-val" id="inv-madera">--</span>
+      </div>
+      <div class="inv-item">
+        <span>Piedra:</span>
+        <span class="stat-val" id="inv-piedra">--</span>
+      </div>
+    </div>
+
+    <button id="btn-reserve" class="btn">Despachar Envío de Madera</button>
+  </div>
+
+  <div id="fallback" class="fallback-overlay hidden">
+    <div class="fallback-card">
+      <div style="font-size: 2.5rem; margin-bottom: 12px;">⚠️</div>
+      <h2 style="color: #D96A64; margin-bottom: 10px;">WebGPU No Soportado</h2>
+      <p style="font-size: 0.85rem; line-height: 1.5; color: #94A3B8; margin-bottom: 20px;">
+        Universo RTS requiere la API nativa de <strong>WebGPU</strong> para garantizar el renderizado masivo sin lag. Tu navegador actual no tiene WebGPU activado o carece de soporte de hardware.
+      </p>
+      <button onclick="location.reload()" class="btn" style="background: #2563EB; color: #FFF;">Reintentar</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

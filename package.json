@@ -1,25 +1,25 @@
 {
-  "name": "worlio",
+  "name": "universo-rts",
   "version": "0.1.0",
-  "description": "3D WebGPU Game Engine Foundation",
+  "description": "3D Persistent WebGPU MMO-RTS Game Engine",
+  "private": true,
   "type": "module",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
-  "keywords": [
-    "webgpu",
-    "3d",
-    "game-engine",
-    "railway"
-  ],
-  "author": "Aaron Bacallao",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.21.0"
+    "dev": "tsx watch apps/server/src/index.ts",
+    "start": "tsx apps/server/src/index.ts",
+    "check": "pnpm -r run check",
+    "build": "pnpm -r run build",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "format:check": "prettier --check \"**/*.{ts,js,json,md,html,css}\""
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.2"
   }
 }
