@@ -9,6 +9,10 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@universo/shared": "workspace:*"
+    "@universo/shared": "workspace:*",
+    "sql.js": "^1.14.2"
+  },
+  "devDependencies": {
+    "@types/sql.js": "^1.4.11"
   }
 }

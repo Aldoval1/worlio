@@ -1,9 +1,9 @@
 # Estado Operacional del Proyecto — Universo RTS
 
 **Archivo:** `docs/PROJECT_STATE.md`  
-**Última Actualización:** 2026-10-12 22:10 UTC  
-**Fase Actual:** FASE 1 · VIABILIDAD DEL MUNDO 3D  
-**Ticket Activo:** T20 — Persistencia de ediciones de relieve, carreteras y agotamiento  
+**Última Actualización:** 2026-10-12 22:15 UTC  
+**Fase Actual:** FASE 2 · VERTICAL SLICE URBANO  
+**Ticket Activo:** T21 — Editor de carreteras curvas y conectividad vial  
 **Rama Git:** `main`
 
 ---
@@ -17,7 +17,7 @@
   - Monorepo pnpm configurado (`@universo/shared`, `@universo/worldgen`, `@universo/domain`, `@universo/server`, `@universo/client`).
 - [x] **Calidad y Pipeline:**
   - TypeScript project references (`tsc -b`) compilando limpiamente sin errores.
-  - Suite de pruebas automatizadas con Vitest ejecutando 110 pruebas unitarias aprobadas (18 suites).
+  - Suite de pruebas automatizadas con Vitest ejecutando 115 pruebas unitarias aprobadas (19 suites).
   - CI de GitHub Actions configurado en `.github/workflows/ci.yml`.
   - Zod schemas en runtime para contratos de red y mensajes de cliente-servidor.
   - Telemetría percentil (`p50`, `p90`, `p99`) y validador de catálogo de activos.
@@ -34,6 +34,11 @@
   - Transición continua órbita-región (`TransitionCoordinator`, Slerp de cuaterniones, niebla atmosférica diurna $80\text{ km} \to 2\text{ km}$, horizonte físico y planos de corte dinámicos anti z-fighting).
   - Navegación al suelo a 2 metros (`queryGroundUnderPosition`, `resolveGroundCollision` clamp $\ge 2.0\text{ m}$, deflexión tangencial en pendientes `slideAlongSlope` y controlador `RtsCameraController` con seguimiento de contorno del terreno).
   - Bioclimatología de Whittaker, paleta PBR sobria (12 biomas con albedos físicos, rugosidades y metalicidad) y normales topográficas analíticas $(\mathbf{T}_u \times \mathbf{T}_v)$ a todas las escalas para iluminación solar real.
+- [x] **Persistencia de Dominio y Modificaciones de Terreno:**
+  - Servicio transaccional SQLite ACID (`TilePersistenceDatabase`) para deltas de relieve por vértice, carreteras e inventario de depósitos naturales.
+  - Versionado optimista por tesela e invalidación de caché.
+  - Conservación física y no-duplicación de reservas ($R_{\text{current}} \ge 0$).
+  - Supervivencia verificada a recarga de navegador y reinicio de servidor.
 
 ---
 
@@ -52,19 +57,19 @@
 |   Fase    | Nombre                           | Total Tickets | Completados |           Estado            |
 | :-------: | :------------------------------- | :-----------: | :---------: | :-------------------------: |
 |   **0**   | **PREPRODUCCIÓN**                |       8       |      8      |   🟢 COMPLETADA AL 100%     |
-|     1     | VIABILIDAD DEL MUNDO 3D          |      12       |     11      | 🟡 EN PROGRESO (T20 activo) |
-|     2     | VERTICAL SLICE URBANO            |       7       |      0      |        ⚪ PENDIENTE         |
+|   **1**   | **VIABILIDAD DEL MUNDO 3D**      |      12       |     12      |   🟢 COMPLETADA AL 100%     |
+|     2     | VERTICAL SLICE URBANO            |       7       |      0      | 🟡 EN PROGRESO (T21 activo) |
 |     3     | DOMINIO ECONÓMICO                |      10       |      0      |        ⚪ PENDIENTE         |
 |     4     | MULTIJUGADOR, ROLES Y POLÍTICA   |       7       |      0      |        ⚪ PENDIENTE         |
 |     5     | ESTRATEGIA Y CONFLICTO           |       5       |      0      |        ⚪ PENDIENTE         |
 |     6     | PLANETA DINÁMICO Y ESCALA        |       4       |      0      |        ⚪ PENDIENTE         |
 |     7     | ESPACIO E INTERESTELAR           |       4       |      0      |        ⚪ PENDIENTE         |
 |     8     | PRODUCCIÓN, PULIDO Y LANZAMIENTO |       7       |      0      |        ⚪ PENDIENTE         |
-| **Total** | **Ciclo Completo**               |    **64**     |   **19**    |       **29.7% General**     |
+| **Total** | **Ciclo Completo**               |    **64**     |   **20**    |       **31.25% General**    |
 
 ---
 
-## 4. Tickets Completados de Fase 1
+## 4. Tickets Completados de Fase 1 (100%)
 
 - [x] **T09:** Inicialización asíncrona de Babylon.js WebGPU, pantalla de soporte y benchmark base.
 - [x] **T10:** Instanciado masivo y presupuesto GPU (Thin Instances 10k entidades).
@@ -77,10 +82,11 @@
 - [x] **T17:** Transición orbital-regional y horizonte físico.
 - [x] **T18:** Navegación al suelo a 2m, colisión y deslizamiento en pendientes.
 - [x] **T19:** Biomas, materialidad PBR y normal visual a todas las escalas.
+- [x] **T20:** Persistencia de ediciones de relieve, carreteras y agotamiento.
 
 ---
 
 ## 5. Próximos Pasos Inmediatos
 
-1. Ejecutar **T20 — Persistencia de ediciones de relieve, carreteras y agotamiento** (`packages/domain`, `apps/server`, deltas de tesela en SQLite WAL, cierre de Fase 1).
-2. Comenzar **FASE 2 · VERTICAL SLICE URBANO** con **T21 — Editor de carreteras curvas y conectividad vial**.
+1. Ejecutar **T21 — Editor de carreteras curvas y conectividad vial** (Splines proyectadas sobre terreno, grafo determinista de nodos/aristas guardado en servidor).
+2. Continuar con **T22 — Zonificación, parcelas y edificación privada automatizada**.

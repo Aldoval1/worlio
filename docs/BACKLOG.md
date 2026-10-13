@@ -85,8 +85,8 @@
 - [x] **T19 — Biomas, materialidad y normal visual a todas las escalas**
   - _Prioridad:_ P1 | _Banda:_ M | _Dependencia:_ T15, T18, T07 | _Estado:_ DONE
   - _Criterio:_ Biomas por latitud, humedad y altura; materiales PBR sobrios; bosque/monte reconocible desde órbita y suelo.
-- [ ] **T20 — Persistencia de ediciones de relieve, carreteras y agotamiento**
-  - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T18, T05 | _Estado:_ PENDING
+- [x] **T20 — Persistencia de ediciones de relieve, carreteras y agotamiento**
+  - _Prioridad:_ P0 | _Banda:_ M | _Dependencia:_ T18, T05 | _Estado:_ DONE
   - _Criterio:_ Deltas versionados por tile en SQLite; excavaciones y caminos sobreviven a recarga de navegador.
 
 ---
